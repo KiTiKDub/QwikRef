@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<FILTERGRAPH>
+  <FILTER uid="1" x="0.5902255639097744" y="0.05882352941176471" useARA="0">
+    <PLUGIN name="Audio Input" descriptiveName="" format="Internal" category="I/O devices"
+            manufacturer="JUCE" version="1.0" file="" uniqueId="246006c0"
+            isInstrument="0" fileTime="0" infoUpdateTime="0" numInputs="0"
+            numOutputs="2" isShell="0" hasARAExtension="0" uid="246006c0"/>
+    <STATE>0.</STATE>
+    <LAYOUT>
+      <INPUTS>
+        <BUS index="0" layout="disabled"/>
+      </INPUTS>
+      <OUTPUTS>
+        <BUS index="0" layout="L R"/>
+      </OUTPUTS>
+    </LAYOUT>
+  </FILTER>
+  <FILTER uid="2" x="0.2819548872180451" y="0.0819327731092437" useARA="0">
+    <PLUGIN name="MIDI Input" descriptiveName="" format="Internal" category="I/O devices"
+            manufacturer="JUCE" version="1.0" file="" uniqueId="a9e4f9eb"
+            isInstrument="0" fileTime="0" infoUpdateTime="0" numInputs="0"
+            numOutputs="0" isShell="0" hasARAExtension="0" uid="a9e4f9eb"/>
+    <STATE>0.</STATE>
+    <LAYOUT>
+      <INPUTS>
+        <BUS index="0" layout="disabled"/>
+      </INPUTS>
+      <OUTPUTS>
+        <BUS index="0" layout="disabled"/>
+      </OUTPUTS>
+    </LAYOUT>
+  </FILTER>
+  <FILTER uid="3" x="0.493734335839599" y="0.9453781512605042" useARA="0">
+    <PLUGIN name="Audio Output" descriptiveName="" format="Internal" category="I/O devices"
+            manufacturer="JUCE" version="1.0" file="" uniqueId="724248cb"
+            isInstrument="0" fileTime="0" infoUpdateTime="0" numInputs="2"
+            numOutputs="0" isShell="0" hasARAExtension="0" uid="724248cb"/>
+    <STATE>0.</STATE>
+    <LAYOUT>
+      <INPUTS>
+        <BUS index="0" layout="L R"/>
+      </INPUTS>
+      <OUTPUTS>
+        <BUS index="0" layout="disabled"/>
+      </OUTPUTS>
+    </LAYOUT>
+  </FILTER>
+  <FILTER uid="4" x="0.25" y="0.9" useARA="0">
+    <PLUGIN name="MIDI Output" descriptiveName="" format="Internal" category="I/O devices"
+            manufacturer="JUCE" version="1.0" file="" uniqueId="9d5bbb00"
+            isInstrument="0" fileTime="0" infoUpdateTime="0" numInputs="0"
+            numOutputs="0" isShell="0" hasARAExtension="0" uid="9d5bbb00"/>
+    <STATE>0.</STATE>
+    <LAYOUT>
+      <INPUTS>
+        <BUS index="0" layout="disabled"/>
+      </INPUTS>
+      <OUTPUTS>
+        <BUS index="0" layout="disabled"/>
+      </OUTPUTS>
+    </LAYOUT>
+  </FILTER>
+  <FILTER uid="22" x="0.6729323308270677" y="0.2184873949579832" useARA="0"
+          uiLastX_Normal="417" uiLastY_Normal="425" uiopen_Normal="0">
+    <PLUGIN name="EQ Curve Analyzer 2" format="VST3" category="Fx|Analyzer"
+            manufacturer="Bertom" version="2.0.1" file="C:\Program Files\Common Files\VST3\Bertom_EQCurveAnalyzer2.vst3\Contents\x86_64-win\Bertom_EQCurveAnalyzer2.vst3"
+            uniqueId="9fa78bef" isInstrument="0" fileTime="18a595ab740" infoUpdateTime="18ee87ebf4c"
+            numInputs="2" numOutputs="2" isShell="0" hasARAExtension="0"
+            uid="ffbcafa2"/>
+    <STATE>850.VMjLgjz....O+fWarAhckI2bo8la8HRLt.iHfTlai8FYo41Y8HRUTYTK3HxO9.BOVMEUy.Ea0cVZtMEcgQWY9vSRC8Vav8lak4Fc9TSMy3BTEwlXmAiUYoWUrIVdA4hKA4lKTETRUAUSAAkKBolQY4BQlETQDQUUTgCQtDSQFEFLUYjKAolKA4hKt3hKt3hK1sxPt.UQpQUPvPjKAgDTZoVPP4BRTYFTYETUPMUSE4RLEYTXvTkQtDjZtDjKt3hKt3hKt3hKt3BTEoFUAACQtDDRPokZAAkKGQkcPEzcTIkPAY1XmcmUisVPP4RRP4hKt3hKt3hKl0VNt3BUAkTUP0TPP4hPpYTVtPDTBUDVpEEUMUkTZUEQtDSQFEFLUYjKAolKA4hKt3hKt3hKt3BQt.UQpQUPvPjKAgDTZoVPP4BRTYVTRUEUQoUUD4RLEYTXvTkQtDjZtDjKt3hKt3hKt3hKt3BTEoFUAACQtDDRPokZAAkKGQkcQIENTUETAY1XmcmUisVPP4RRP4hKt3hKt3hKtbyJt3BUAkTUP0TPP4hPpYTVtPDTBUjcTAEUUo1TCsVQtDSQFEFLUYjKAolKA4hKt3hKt3hKt3hKt.UQpQUPvPjKAgDTZoVPP4xQT4xTEkUUQwTPlM1Y2Y0XqEDTtjDTt3hKt3hKt3hKJ4xPtPUPIUETMEDTtHjZFkkKD4hPEwTUQQ0XTEkSAY1XmcmUisVPP4RRP4hKt3hKt3hKtbyJt.UTpslQiUWRxPkdEYzXqEDTtfjdTg0LAITVBEDTtjDTt3hKt3hKt3hKJ4BLToEcAgVT3UkUh4BQPIDQt3hKt3hKt3BTCAUSEYDYlgkZhsVQG4RPp4RPt3hKt3hKtf1TCQUUzEkUYg2cVgEMAAkKIAkKt3hKt3hKt3hKtvTQZU2XGgjcmYEV4UkQtDDQ14BS3DSVlgkZhsVQG4RPDYlKEEkUZoGNrIlYhckVpE0QZ4BQPETPt3lKt3BTQo1ZFMVcIcDRtUkUZ01YFMlKDAUPA4BUt3hKt3hKt3hKt3hKt3hKt3hKt3hKt3hKt3haTU0PUQDU3sFaicVTWkEQEYzXmEDOujzPu0Fbu4VYtQmO77hUSQ0LPwVcmklaSQWXzUlO..</STATE>
+    <LAYOUT>
+      <INPUTS>
+        <BUS index="0" layout="L R"/>
+      </INPUTS>
+      <OUTPUTS>
+        <BUS index="0" layout="L R"/>
+      </OUTPUTS>
+    </LAYOUT>
+  </FILTER>
+  <FILTER uid="23" x="0.8220551378446115" y="0.7100840336134454" useARA="0"
+          uiLastX_Normal="1810" uiLastY_Normal="795" uiopen_Normal="1">
+    <PLUGIN name="EQ Curve Analyzer 2" format="VST3" category="Fx|Analyzer"
+            manufacturer="Bertom" version="2.0.1" file="C:\Program Files\Common Files\VST3\Bertom_EQCurveAnalyzer2.vst3\Contents\x86_64-win\Bertom_EQCurveAnalyzer2.vst3"
+            uniqueId="9fa78bef" isInstrument="0" fileTime="18a595ab740" infoUpdateTime="18ee87ebf4d"
+            numInputs="2" numOutputs="2" isShell="0" hasARAExtension="0"
+            uid="ffbcafa2"/>
+    <STATE>850.VMjLgjz....O+fWarAhckI2bo8la8HRLt.iHfTlai8FYo41Y8HRUTYTK3HxO9.BOVMEUy.Ea0cVZtMEcgQWY9vSRC8Vav8lak4Fc9TSMy3BTEwlXmAiUYoWUrIVdA4hKA4lKTETRUAUSAAkKBolQY4BQlETQDQUUTgCQtDSQFEFLUYjKAolKA4hKt3hKt3hK1sxPt.UQpQUPvPjKAgDTZoVPP4BRTYFTYETUPMUSE4RLEYTXvTkQtDjZtDjKt3hKt3hKt3hKt3BTEoFUAACQtDDRPokZAAkKGQkcPEzcTIkPAY1XmcmUisVPP4RRP4hKt3hKt3hKl0VNt3BUAkTUP0TPP4hPpYTVtPDTBUDVpEEUMUkTZUEQtDSQFEFLUYjKAolKA4hKt3hKt3hKt3BQt.UQpQUPvPjKAgDTZoVPP4BRTYVTRUEUQoUUD4RLEYTXvTkQtDjZtDjKt3hKt3hKt3hKt3BTEoFUAACQtDDRPokZAAkKGQkcQIENTUETAY1XmcmUisVPP4RRP4hKt3hKt3hKtbyJt3BUAkTUP0TPP4hPpYTVtPDTBUjcTAEUUo1TCsVQtDSQFEFLUYjKAolKA4hKt3hKt3hKt3hKt.UQpQUPvPjKAgDTZoVPP4xQT4xTEkUUQwTPlM1Y2Y0XqEDTtjDTt3hKt3hKt3hKJ4xPtPUPIUETMEDTtHjZFkkKD4hPEwTUQQ0XTEkSAY1XmcmUisVPP4RRP4hKt3hKt3hKt3hKt.UTpslQiUWRxPkdEYzXqEDTtfjdTg0LAITVBEDTtjDTt3hKt3hKt3hKJ4BLToEcAgVT3UkUh4BQPIDQt3hKt3hKt3BTCAUSEYDYlgkZhsVQG4RPp4RPt3hKt3hKtf1TCQUUzEkUYg2cVgEMAAkKIAkKt3hKt3hKt3hKtvTQZU2XGgjcmYEV4UkQtDDQl4BS3DSVlgkZhsVQG4RPDYlKEEkUZoGNrIlYhckVpE0QZ4BQPETPt3lKt3BTQo1ZFMVcIcDRtUkUZ01YFMlKDAUPA4BUt3hKt3hKt3hKt3hKt3hKt3hKt3hKt3hKt3haTU0PUQDU3sFaicVTWkEQEYzXmEDOujzPu0Fbu4VYtQmO77hUSQ0LPwVcmklaSQWXzUlO..</STATE>
+    <LAYOUT>
+      <INPUTS>
+        <BUS index="0" layout="L R"/>
+      </INPUTS>
+      <OUTPUTS>
+        <BUS index="0" layout="L R"/>
+      </OUTPUTS>
+    </LAYOUT>
+  </FILTER>
+  <FILTER uid="24" x="0.7280701754385965" y="0.4516806722689076" useARA="0"
+          uiLastX_Normal="558" uiLastY_Normal="504" uiopen_Normal="1">
+    <PLUGIN name="QwikRef" format="VST3" category="Fx" manufacturer="yourcompany"
+            version="1.0.0" file="C:\Program Files\Common Files\VST3\QwikRef.vst3\Contents\x86_64-win\QwikRef.vst3"
+            uniqueId="29fdd2a" isInstrument="0" fileTime="18ee87b2896" infoUpdateTime="18ee87ebf4d"
+            numInputs="2" numOutputs="2" isShell="0" hasARAExtension="0"
+            uid="e95abba5"/>
+    <STATE>191.VMjLgXK....O+fWarAhckI2bo8la8HRLt.iHfTlai8FYo41Y8HRUTYTK3HxO9.BOVMEUy.Ea0cVZtMEcgQWY9vSRC8Vav8lak4Fc9XCLt3hKt3hKt3hKt3hYRUUSTEETIckVwTjQisVTTgkdEYjKAQjYPQSPWgUdMcjKAQjct3hdA4hKt3hKt3hKtnTUv.UQAslXuk0UXoWUFE0YQcEV77RRC8Vav8lak4Fc9vyKVMEUy.Ea0cVZtMEcgQWY9..</STATE>
+    <LAYOUT>
+      <INPUTS>
+        <BUS index="0" layout="L R"/>
+      </INPUTS>
+      <OUTPUTS>
+        <BUS index="0" layout="L R"/>
+      </OUTPUTS>
+    </LAYOUT>
+  </FILTER>
+  <CONNECTION srcFilter="22" srcChannel="0" dstFilter="24" dstChannel="0"/>
+  <CONNECTION srcFilter="22" srcChannel="1" dstFilter="24" dstChannel="1"/>
+  <CONNECTION srcFilter="24" srcChannel="0" dstFilter="23" dstChannel="0"/>
+  <CONNECTION srcFilter="24" srcChannel="1" dstFilter="23" dstChannel="1"/>
+</FILTERGRAPH>
