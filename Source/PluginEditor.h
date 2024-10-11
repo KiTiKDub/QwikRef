@@ -8,8 +8,9 @@
 
 #pragma once
 
-#include <JuceHeader.h>
 #include "PluginProcessor.h"
+#include "BinaryData.h"
+#include "juce_core/juce_core.h"
 #include "kLookAndFeel.h"
 
 //==============================================================================

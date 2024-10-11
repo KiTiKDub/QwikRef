@@ -81,12 +81,10 @@ void QwikRefAudioProcessorEditor::paint (juce::Graphics& g)
     divider.lineTo(200, 30);
     g.strokePath(divider, juce::PathStrokeType(1));
 
-    juce::Font::findFonts(fonts);
-    auto test = fonts[56];
-    test.setItalic(true);
-    test.setHeight(25);
+    auto newFont = juce::Font(juce::Typeface::createSystemTypefaceFor(BinaryData::offshore_ttf, BinaryData::offshore_ttfSize));
 
-    g.setFont(test);
+    newFont.setHeight(25);
+    g.setFont(newFont);
     g.drawFittedText("QwikRef", infoArea.toNearestInt(), juce::Justification::Justification::centred, 1);
     g.setFont(12);
     g.drawFittedText("By KiTiK Music", logoBackdrop.toNearestInt(), juce::Justification::Justification::centredTop, 1);
