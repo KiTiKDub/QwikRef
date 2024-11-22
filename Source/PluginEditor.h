@@ -41,5 +41,9 @@ private:
     juce::ToggleButton car, laptop, phone, tv, airpods, speaker, power;
     juce::AudioProcessorValueTreeState::ButtonAttachment carAT, laptopAT, phoneAT, tvAT, airpodsAT, speakerAT, powerAT;
 
+    juce::ApplicationProperties appProperties;
+
+    int orgWidth{200}, orgHeight{230};
+
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (QwikRefAudioProcessorEditor)
 };
