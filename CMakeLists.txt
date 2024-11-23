@@ -11,7 +11,7 @@ endif()
 
 
 # Change to your project name
-project(QwikRef VERSION 1.0.1)
+project(QwikRef VERSION 1.0.3)
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_XCODE_GENERATE_SCHEME OFF)

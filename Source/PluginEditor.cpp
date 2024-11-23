@@ -170,7 +170,7 @@ void QwikRefAudioProcessorEditor::resized()
     speaker.setBounds(low);
     power.setBounds(powerArea);
 
-    auto font = juce::Font::Font(10);
+    auto font = juce::Font(10);
     gumroad.setFont(font, false);
     gumroad.setColour(0x1001f00, juce::Colours::white);
     gumroad.setBounds(linkSpace);

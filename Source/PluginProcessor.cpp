@@ -162,9 +162,11 @@ void QwikRefAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, juce
 
     auto sampleRate = getSampleRate();
 
+    juce::dsp::AudioBlock<float> blockRight;
+
     auto block = juce::dsp::AudioBlock<float>(buffer);
     auto blockLeft = block.getSingleChannelBlock(0);
-    auto blockRight = block.getSingleChannelBlock(1);
+    blockRight = totalNumOutputChannels == 1 ? block.getSingleChannelBlock(0) : block.getSingleChannelBlock(1);
     auto contextLeft = juce::dsp::ProcessContextReplacing<float>(blockLeft);
     auto contextRight = juce::dsp::ProcessContextReplacing<float>(blockRight);
 
