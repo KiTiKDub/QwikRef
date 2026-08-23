@@ -30,6 +30,7 @@ QwikRefAudioProcessor::QwikRefAudioProcessor()
     btSpeaker = dynamic_cast<juce::AudioParameterBool*>(apvts.getParameter("btSpeaker"));
     power = dynamic_cast<juce::AudioParameterBool*>(apvts.getParameter("power"));
 
+    utilityMenu.startAuthFlow();
 }
 
 QwikRefAudioProcessor::~QwikRefAudioProcessor()
@@ -87,26 +88,29 @@ int QwikRefAudioProcessor::getCurrentProgram()
 
 void QwikRefAudioProcessor::setCurrentProgram (int index)
 {
+    juce::ignoreUnused(index);
 }
 
 const juce::String QwikRefAudioProcessor::getProgramName (int index)
 {
+    juce::ignoreUnused(index);
     return {};
 }
 
 void QwikRefAudioProcessor::changeProgramName (int index, const juce::String& newName)
 {
+    juce::ignoreUnused(index, newName);
 }
 
 //==============================================================================
 void QwikRefAudioProcessor::prepareToPlay (double sampleRate, int samplesPerBlock)
 {
-    juce::dsp::ProcessSpec spec;
-    spec.maximumBlockSize = samplesPerBlock;
+    juce::dsp::ProcessSpec spec{};
+    spec.maximumBlockSize = static_cast<juce::uint32>(samplesPerBlock);
     spec.numChannels = 1;
     spec.sampleRate = sampleRate;
 
-    for(int i = 0; i < 2; i++)
+    for(unsigned long i = 0; i < 2; i++)
     {
         lowCut[i].prepare(spec);
         peak1[i].prepare(spec);
@@ -151,6 +155,8 @@ bool QwikRefAudioProcessor::isBusesLayoutSupported (const BusesLayout& layouts) 
 
 void QwikRefAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, juce::MidiBuffer& midiMessages)
 {
+    juce::ignoreUnused(midiMessages);
+
     juce::ScopedNoDenormals noDenormals;
     auto totalNumInputChannels  = getTotalNumInputChannels();
     auto totalNumOutputChannels = getTotalNumOutputChannels();
@@ -158,7 +164,7 @@ void QwikRefAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, juce
     for (auto i = totalNumInputChannels; i < totalNumOutputChannels; ++i)
         buffer.clear (i, 0, buffer.getNumSamples());
 
-    if (power->get()) { return; }
+    if (utilityMenu.authState.load() != UtilityMenu::authorized || power->get()) { return; }
 
     auto sampleRate = getSampleRate();
 
@@ -290,7 +296,7 @@ void QwikRefAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, juce
         peak1[0].process(contextLeft);
         peak1[1].process(contextRight);
 
-        auto peak2Coef = juce::dsp::IIR::Coefficients<float>::makePeakFilter(sampleRate, 2250, .71, juce::Decibels::decibelsToGain(-2.5));
+        auto peak2Coef = juce::dsp::IIR::Coefficients<float>::makePeakFilter(sampleRate, 2250, .71, juce::Decibels::decibelsToGain(-2.5f));
         peak2[0].coefficients = peak2Coef;
         peak2[1].coefficients = peak2Coef;;
         peak2[0].process(contextLeft);
@@ -319,7 +325,7 @@ void QwikRefAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, juce
         lowCut[0].process(contextLeft);
         lowCut[1].process(contextRight);
 
-        auto peak1Coef = juce::dsp::IIR::Coefficients<float>::makePeakFilter(sampleRate, 200, .4, juce::Decibels::decibelsToGain(2.5));
+        auto peak1Coef = juce::dsp::IIR::Coefficients<float>::makePeakFilter(sampleRate, 200, .4, juce::Decibels::decibelsToGain(2.5f));
         peak1[0].coefficients = peak1Coef;
         peak1[1].coefficients = peak1Coef;
         peak1[0].process(contextLeft);
@@ -346,7 +352,7 @@ void QwikRefAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, juce
 
     else
     {
-        float db = juce::Decibels::decibelsToGain(-2.5);
+        float db = juce::Decibels::decibelsToGain(-2.5f);
 
         auto lowCutCoef = juce::dsp::IIR::Coefficients<float>::makeHighPass(sampleRate, 60);
         lowCut[0].coefficients = lowCutCoef;
@@ -360,7 +366,7 @@ void QwikRefAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, juce
         peak1[0].process(contextLeft);
         peak1[1].process(contextRight);
 
-        auto peak2Coef = juce::dsp::IIR::Coefficients<float>::makePeakFilter(sampleRate, 300, .4, juce::Decibels::decibelsToGain(2.5));
+        auto peak2Coef = juce::dsp::IIR::Coefficients<float>::makePeakFilter(sampleRate, 300, .4, juce::Decibels::decibelsToGain(2.5f));
         peak2[0].coefficients = peak2Coef;
         peak2[1].coefficients = peak2Coef;
         peak2[0].process(contextLeft);
@@ -400,8 +406,7 @@ void QwikRefAudioProcessor::getStateInformation (juce::MemoryBlock& destData)
 
 void QwikRefAudioProcessor::setStateInformation (const void* data, int sizeInBytes)
 {
-    auto tree = juce::ValueTree::readFromData(data, sizeInBytes);
-    if (tree.isValid()) {
+    if (const auto tree = juce::ValueTree::readFromData(data, static_cast<size_t>(sizeInBytes)); tree.isValid()) {
         apvts.replaceState(tree);
     }
 }

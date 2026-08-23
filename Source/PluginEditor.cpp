@@ -44,6 +44,15 @@ QwikRefAudioProcessorEditor::QwikRefAudioProcessorEditor (QwikRefAudioProcessor&
     addAndMakeVisible(speaker);
     addAndMakeVisible(power);
 
+    authButton.setComponentID("AuthButton");
+    authButton.setColour(juce::TextButton::buttonColourId, juce::Colours::transparentBlack);
+    authButton.setColour(juce::TextButton::buttonOnColourId, juce::Colours::transparentBlack);
+    authButton.setColour(juce::TextButton::textColourOffId, juce::Colours::white);
+    authButton.setColour(juce::TextButton::textColourOnId, juce::Colours::white);
+    updateAuthButtonText();
+    authButton.onClick = [this]() { onAuthButtonClicked(); };
+    addAndMakeVisible(authButton);
+
     addAndMakeVisible(gumroad);
 
     juce::PropertiesFile::Options options;
@@ -69,10 +78,13 @@ QwikRefAudioProcessorEditor::QwikRefAudioProcessorEditor (QwikRefAudioProcessor&
     setResizable(true, true);
     setSize(static_cast<int>(orgWidth * sizeRatio),
             static_cast<int>(orgHeight * sizeRatio));
+
+    startTimerHz(4);
 }
 
 QwikRefAudioProcessorEditor::~QwikRefAudioProcessorEditor()
 {
+    stopTimer();
     setLookAndFeel(nullptr);
 }
 
@@ -93,34 +105,34 @@ void QwikRefAudioProcessorEditor::paint (juce::Graphics& g)
     auto bounds = juce::Rectangle<int>{orgWidth, orgHeight};
 
     auto infoArea = bounds.removeFromTop(30);
-    infoArea.setWidth(infoArea.getWidth()*sizeRatio);
-    infoArea.setHeight(infoArea.getHeight()*sizeRatio);
+    infoArea.setWidth(static_cast<int>(infoArea.getWidth()*sizeRatio));
+    infoArea.setHeight(static_cast<int>(infoArea.getHeight()*sizeRatio));
     auto logoBackdrop = bounds;
 
-    auto top = bounds.removeFromTop(bounds.getHeight() * .33);
-    auto mid = bounds.removeFromTop(bounds.getHeight() * .5);
+    auto top = bounds.removeFromTop(static_cast<int>(bounds.getHeight() * .33));
+    auto mid = bounds.removeFromTop(static_cast<int>(bounds.getHeight() * .5));
     auto low = bounds;
 
-    auto leftTop = top.removeFromLeft(top.getWidth() * .5);
-    auto leftMid = mid.removeFromLeft(mid.getWidth() * .5);
-    auto leftLow = low.removeFromLeft(low.getWidth() * .5);
+    top.removeFromLeft(static_cast<int>(top.getWidth() * .5));
+    mid.removeFromLeft(static_cast<int>(mid.getWidth() * .5));
+    low.removeFromLeft(static_cast<int>(low.getWidth() * .5));
 
     juce::Path divider;
-    divider.startNewSubPath(0, 30 * sizeRatio);
-    divider.lineTo(200 * sizeRatio, 30 * sizeRatio);
+    divider.startNewSubPath(0, static_cast<float>(30 * sizeRatio));
+    divider.lineTo(static_cast<float>(200 * sizeRatio), static_cast<float>(30 * sizeRatio));
     g.strokePath(divider, juce::PathStrokeType(1));
 
-    logoBackdrop.setWidth(logoBackdrop.getWidth() * sizeRatio);
-    logoBackdrop.setHeight(logoBackdrop.getHeight() * sizeRatio);
-    logoBackdrop.setTop(30*sizeRatio);
-    logoBackdrop.setBottom(orgHeight * sizeRatio);
+    logoBackdrop.setWidth(static_cast<int>(logoBackdrop.getWidth() * sizeRatio));
+    logoBackdrop.setHeight(static_cast<int>(logoBackdrop.getHeight() * sizeRatio));
+    logoBackdrop.setTop(static_cast<int>(30*sizeRatio));
+    logoBackdrop.setBottom(static_cast<int>(orgHeight * sizeRatio));
 
     auto newFont = juce::Font(juce::Typeface::createSystemTypefaceFor(BinaryData::offshore_ttf, BinaryData::offshore_ttfSize));
 
-    newFont.setHeight(25*sizeRatio);
+    newFont.setHeight(static_cast<float>(25*sizeRatio));
     g.setFont(newFont);
     g.drawFittedText("QwikRef", infoArea.toNearestInt(), juce::Justification::Justification::centred, 1);
-    newFont.setHeight(12*sizeRatio);
+    newFont.setHeight(static_cast<float>(12*sizeRatio));
     g.setFont(newFont);
     g.drawFittedText("By KiTiK Music", logoBackdrop.toNearestInt(), juce::Justification::Justification::centredTop, 1);
     
@@ -132,7 +144,7 @@ void QwikRefAudioProcessorEditor::paint (juce::Graphics& g)
 
 void QwikRefAudioProcessorEditor::resized()
 {
-    const auto scaleFactor = static_cast<float>(getWidth()) / orgWidth;
+    const auto scaleFactor = static_cast<float>(getWidth()) / static_cast<float>(orgWidth);
     if (auto *properties = appProperties.getCommonSettings(true))
     {
         properties->setValue("sizeRatio", scaleFactor);
@@ -142,16 +154,17 @@ void QwikRefAudioProcessorEditor::resized()
     auto bounds = juce::Rectangle<int>{orgWidth, orgHeight};
 
     auto infoArea = bounds.removeFromTop(30);
-    auto powerArea = infoArea.removeFromLeft(infoArea.getWidth() * .15);
-    auto linkSpace = infoArea.removeFromRight(infoArea.getWidth() * .2);
+    auto powerArea = infoArea.removeFromLeft(static_cast<int>(infoArea.getWidth() * .15));
+    auto authArea = infoArea.removeFromLeft(static_cast<int>(infoArea.getWidth() * .22));
+    auto linkSpace = infoArea.removeFromRight(static_cast<int>(infoArea.getWidth() * .2));
 
-    auto top = bounds.removeFromTop(bounds.getHeight() * .33);
-    auto mid = bounds.removeFromTop(bounds.getHeight() * .5);
+    auto top = bounds.removeFromTop(static_cast<int>(bounds.getHeight() * .33));
+    auto mid = bounds.removeFromTop(static_cast<int>(bounds.getHeight() * .5));
     auto low = bounds;
 
-    auto leftTop = top.removeFromLeft(top.getWidth() * .5);
-    auto leftMid = mid.removeFromLeft(mid.getWidth() * .5);
-    auto leftLow = low.removeFromLeft(low.getWidth() * .5);
+    auto leftTop = top.removeFromLeft(static_cast<int>(top.getWidth() * .5));
+    auto leftMid = mid.removeFromLeft(static_cast<int>(mid.getWidth() * .5));
+    auto leftLow = low.removeFromLeft(static_cast<int>(low.getWidth() * .5));
 
     car.setTransform(juce::AffineTransform::scale(scaleFactor));
     laptop.setTransform(juce::AffineTransform::scale(scaleFactor));
@@ -160,6 +173,7 @@ void QwikRefAudioProcessorEditor::resized()
     airpods.setTransform(juce::AffineTransform::scale(scaleFactor));
     speaker.setTransform(juce::AffineTransform::scale(scaleFactor));
     power.setTransform(juce::AffineTransform::scale(scaleFactor));
+    authButton.setTransform(juce::AffineTransform::scale(scaleFactor));
     gumroad.setTransform(juce::AffineTransform::scale(scaleFactor));
 
     car.setBounds(leftTop);
@@ -169,9 +183,44 @@ void QwikRefAudioProcessorEditor::resized()
     airpods.setBounds(leftLow);
     speaker.setBounds(low);
     power.setBounds(powerArea);
+    authButton.setBounds(authArea);
 
     auto font = juce::Font(10);
     gumroad.setFont(font, false);
     gumroad.setColour(0x1001f00, juce::Colours::white);
     gumroad.setBounds(linkSpace);
+}
+
+void QwikRefAudioProcessorEditor::timerCallback()
+{
+    updateAuthButtonText();
+}
+
+void QwikRefAudioProcessorEditor::updateAuthButtonText()
+{
+    const auto state = audioProcessor.utilityMenu.authState.load();
+    juce::String text;
+    switch (state) {
+        case UtilityMenu::loggedOut:    text = "Sign In"; break;
+        case UtilityMenu::unauthorized: text = "Auth";    break;
+        case UtilityMenu::authorized:   text = "Status";  break;
+        default:                        text = "Sign In"; break;
+    }
+    if (authButton.getButtonText() != text)
+        authButton.setButtonText(text);
+}
+
+void QwikRefAudioProcessorEditor::onAuthButtonClicked() const {
+    switch (audioProcessor.utilityMenu.authState.load()) {
+        case UtilityMenu::loggedOut:
+            audioProcessor.utilityMenu.login(false);
+            break;
+        case UtilityMenu::unauthorized:
+            audioProcessor.utilityMenu.authorize();
+            break;
+        case UtilityMenu::authorized:
+            audioProcessor.utilityMenu.status();
+            break;
+        default: ;
+    }
 }

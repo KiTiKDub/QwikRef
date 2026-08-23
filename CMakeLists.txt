@@ -29,6 +29,8 @@ FetchContent_MakeAvailable(juce)
 
 # Make sure you include any new source files here
 set(SourceFiles
+        Source/UtilityMenu.h
+        Source/UtilityMenu.cpp
         Source/PluginEditor.cpp
         Source/PluginEditor.h
         Source/PluginProcessor.cpp
@@ -82,7 +84,7 @@ target_link_libraries(${PROJECT_NAME}
         Assets
         juce::juce_analytics
         juce::juce_audio_basics
-        juce::juce_audio_devices
+        #juce::juce_audio_devices
         #juce::juce_audio_formats
         juce::juce_audio_plugin_client
         juce::juce_audio_processors

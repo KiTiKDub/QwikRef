@@ -16,7 +16,8 @@
 //==============================================================================
 /**
 */
-class QwikRefAudioProcessorEditor  : public juce::AudioProcessorEditor
+class QwikRefAudioProcessorEditor  : public juce::AudioProcessorEditor,
+                                     public juce::Timer
 {
 public:
     QwikRefAudioProcessorEditor (QwikRefAudioProcessor&);
@@ -25,6 +26,7 @@ public:
     //==============================================================================
     void paint (juce::Graphics&) override;
     void resized() override;
+    void timerCallback() override;
 
 private:
     // This reference is provided as a quick way for your editor to
@@ -40,6 +42,10 @@ private:
 
     juce::ToggleButton car, laptop, phone, tv, airpods, speaker, power;
     juce::AudioProcessorValueTreeState::ButtonAttachment carAT, laptopAT, phoneAT, tvAT, airpodsAT, speakerAT, powerAT;
+
+    juce::TextButton authButton;
+    void updateAuthButtonText();
+    void onAuthButtonClicked() const;
 
     juce::ApplicationProperties appProperties;
 
