@@ -1,0 +1,55 @@
+{
+"record" : {
+  "avatar" : "",
+  "collectionId" : "_pb_users_auth_",
+  "collectionName" : "users",
+  "created" : "2026-08-18 18:53:23.650Z",
+  "email" : "test2@test.com",
+  "emailVisibility" : false,
+  "expand" : {
+    "registeredPlugins" : [ {
+      "activated" : false,
+      "collectionId" : "pbc_1397449278",
+      "collectionName" : "registeredPlugins",
+      "created" : "2026-08-18 19:55:31.793Z",
+      "deviceIDs" : [ ],
+      "expand" : { },
+      "id" : "lqfheo5p82mmfcv",
+      "maxCount" : 0,
+      "pluginKeyCode" : "456",
+      "pluginName" : "Disburser",
+      "updated" : "2026-08-18 19:56:04.983Z",
+      "user" : "97i6tdx5mm5juun"
+    }, {
+      "activated" : true,
+      "collectionId" : "pbc_1397449278",
+      "collectionName" : "registeredPlugins",
+      "created" : "2026-08-18 19:05:36.129Z",
+      "deviceIDs" : [ "qkuthpa7hb8mrkq" ],
+      "expand" : {
+        "deviceIDs" : [ {
+          "collectionId" : "pbc_629301376",
+          "collectionName" : "activations",
+          "created" : "2026-08-21 19:32:36.703Z",
+          "hardwareID" : "test",
+          "id" : "qkuthpa7hb8mrkq",
+          "lastSeen" : "2026-08-21 19:32:33.000Z",
+          "plugin" : [ "05geolenglgnmxl" ]
+        } ]
+      },
+      "id" : "05geolenglgnmxl",
+      "maxCount" : 5,
+      "pluginKeyCode" : "123",
+      "pluginName" : "QwikRef",
+      "updated" : "2026-08-21 20:02:55.683Z",
+      "user" : "97i6tdx5mm5juun"
+    } ]
+  },
+  "id" : "97i6tdx5mm5juun",
+  "name" : "password is testpassword",
+  "registeredPlugins" : [ "lqfheo5p82mmfcv", "05geolenglgnmxl" ],
+  "updated" : "2026-08-18 19:56:25.818Z",
+  "verified" : true
+},
+"token" : "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjb2xsZWN0aW9uSWQiOiJfcGJfdXNlcnNfYXV0aF8iLCJleHAiOjE3ODc3NzQ3NjQsImlkIjoiOTdpNnRkeDVtbTVqdXVuIiwicmVmcmVzaGFibGUiOnRydWUsInR5cGUiOiJhdXRoIn0.oSenMf1jV2mtMChK3mGNmT0tcxXkWEx8LLHcJmdLZOo"
+}

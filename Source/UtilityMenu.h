@@ -43,30 +43,31 @@ struct UtilityMenu : public juce::Component {
     void mouseExit(const juce::MouseEvent &e) override;
 
     //==============================================================================
-    // License data structure
+    // Session data structure — encrypted token + metadata
     //==============================================================================
-    struct LicenseInfo {
-        juce::String productKey;
+    struct SessionData {
+        juce::String encryptedToken; // Base64(BlowFish(token))
         juce::String email;
-        juce::String hardwareFingerprint;
-        juce::String activationDate; // ISO 8601 format
-        juce::String expirationDate; // ISO 8601 format
-
-        [[nodiscard]] bool isValid() const;
-        [[nodiscard]] int daysUntilExpiration() const;
+        juce::String lastAuthorizedDate; // ISO 8601 format
     };
 
     //==============================================================================
     // Public API
     //==============================================================================
     static juce::String generateHardwareFingerprint();
-    static juce::File getLicenseFile();
-    bool removeLicenseFile();
+    static juce::File getSessionFile();
+    bool removeSessionFile();
 
-    bool loadLicense(LicenseInfo &info);
-    void saveLicense(const LicenseInfo &info);
+    bool loadSession(SessionData &data);
+    void saveSession(const SessionData &data);
     void startAuthFlow();
     void logout();
+
+    //==============================================================================
+    // Token encryption helpers
+    //==============================================================================
+    static juce::String encryptToken(const juce::String &token);
+    static juce::String decryptToken(const juce::String &encryptedToken);
 
     //==============================================================================
     // Dialog flows (public so editor button can invoke them)
@@ -82,5 +83,6 @@ private:
     juce::String currentEmail; // stored between login → authorize flow
     juce::String apiPluginKeyCode; // pluginKeyCode from API expand
     juce::String apiPluginRecordId; // record ID for PATCH
+    juce::String apiActivationRecordId;
     juce::String authToken; // bearer token from login response
 };
