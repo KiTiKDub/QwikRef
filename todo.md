@@ -34,15 +34,15 @@ I believe I've handled all the scenarios I need to and can move on to go. I may 
 but I think until I have a new plugin in which I want to do tis with, I think just keeping it local will be fine. I also
 need to change how I handle the time stamps before I send a reauthentication request.
 
-1. Look into sending one patch instead of one post and one patch
-2. Logout deletes from the 'activations' table
-3. Change time stamp handling
-4. Set up webhook?
+1. Look into sending one patch instead of one post and one patch [DONE]
+2. Logout deletes from the 'activations' table -> Changed to encryption so file sharing is not possible, stay activated in table
+3. Change time stamp handling [DONE]
+4. Set up webhook? [DONE]
    
 
 ## DB Todo
-1. Update tables to be able to have multiple hardware keys.
-2. Use this new table to set activation time
+1. Update tables to be able to have multiple hardware keys. [DONE]
+2. Use this new table to set activation time -> handled on the client, just keep track of last seen
    1. Once the plugin is registered, set the time stamp
    2. on subsequent authority checks also verify the time stamp is less than 30 days dif then current time
    3. If false, logout user and reprompt sign in

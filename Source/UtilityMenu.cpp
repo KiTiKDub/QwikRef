@@ -63,11 +63,12 @@ juce::String UtilityMenu::decryptToken(const juce::String &encryptedToken) {
     auto key = generateHardwareFingerprint();
     juce::BlowFish blowfish(key.toRawUTF8(), static_cast<int>(key.getNumBytesAsUTF8()));
 
-    juce::MemoryBlock data;
-    juce::Base64::convertFromBase64(data, encryptedToken);
+    juce::MemoryOutputStream mo;
+    juce::Base64::convertFromBase64(mo, encryptedToken);
+    juce::MemoryBlock data(mo.getData(), mo.getDataSize());
     blowfish.decrypt(data);
 
-    return juce::String(static_cast<const char *>(data.getData()), data.getSize());
+    return {static_cast<const char *>(data.getData()), data.getSize()};
 }
 
 //==============================================================================
@@ -258,7 +259,7 @@ void UtilityMenu::login(bool fromLogOut) {
                                                 auto localFingerprint = generateHardwareFingerprint();
                                                 for (auto &device: *deviceIDsArray) {
                                                     if (auto *deviceObj = device.getDynamicObject()) {
-                                                        if (auto hwID = deviceObj->getProperty("hardwareID").toString();
+                                                        if (auto hwID = deviceObj->getProperty("deviceID").toString();
                                                             hwID == localFingerprint) {
                                                             hardwareMatched = true;
                                                             apiActivationRecordId = deviceObj->getProperty("id").
@@ -488,7 +489,10 @@ void UtilityMenu::status() {
 
     juce::String statusMsg;
     statusMsg << "Registered Email: " << session.email << "\n\n";
-    statusMsg << "Last Authorized: " << session.lastAuthorizedDate;
+
+    auto lastAuthTime = juce::Time::fromISO8601(session.lastAuthorizedDate);
+    auto formattedDate = lastAuthTime.formatted("%b %d, %Y %I:%M %p");
+    statusMsg << "Last Authorized: " << formattedDate;
 
     asyncAlertWindow = std::make_unique<SafeAlertWindow>(
         "Session Status", "", juce::MessageBoxIconType::InfoIcon);
@@ -513,24 +517,10 @@ void UtilityMenu::status() {
 
 void UtilityMenu::logout() {
 
-    juce::URL deleteUrl(
-                "http://192.168.4.23:9090/api/collections/activations/records/" + apiActivationRecordId);
-
-    int deleteStatusCode = 0;
-    auto deleteOptions = juce::URL::InputStreamOptions(juce::URL::ParameterHandling::inAddress)
-            .withExtraHeaders(
-                "Content-Type: application/json\r\nAuthorization: Bearer " + authToken + "\r\n")
-            .withHttpRequestCmd("DELETE")
-            .withConnectionTimeoutMs(5000)
-            .withStatusCode(&deleteStatusCode);
-
-    auto deleteStream = deleteUrl.createInputStream(deleteOptions);
-
-    if (deleteStatusCode != 204 && removeSessionFile()) {
-        authState.store(loggedOut);
-        currentEmail = {};
-        apiPluginKeyCode = {};
-        apiPluginRecordId = {};
-        authToken = {};
-    }
+    authState.store(loggedOut);
+    removeSessionFile();
+    currentEmail = {};
+    apiPluginKeyCode = {};
+    apiPluginRecordId = {};
+    authToken = {};
 }
